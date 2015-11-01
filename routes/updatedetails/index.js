@@ -23,6 +23,7 @@ exports.updatedetails = function (req, res) {
         console.log('User is ' + sess.username);
         collection.find({uname: sess.username}).toArray(function (err, rows) {
             if (!err) {
+                console.log('UNAME is '+sess.username);
                 var email = rows[0].email;
                 var fname = rows[0].fname;
                 var lname = rows[0].lname;
