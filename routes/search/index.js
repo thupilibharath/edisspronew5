@@ -15,9 +15,7 @@ exports.search = function (req, res) {
 
         //Validation
         if (typeof id == 'undefined')
-            id = '.*';
-        else
-            id = '.*' + id + '.*';
+            id = 0;
 
         if (typeof categories == 'undefined')
             categories = '.*';
