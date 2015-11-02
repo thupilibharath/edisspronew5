@@ -9,7 +9,7 @@ var path = require('path');
 var mongojs = require('mongojs');
 var MongoStore = require('connect-mongo')(session);
 //var mongodb = require('mongodb');
-var mongoURL = 'mongodb://localhost:27017/Project5';
+var mongoURL = 'mongodb://54.86.241.244:27017/Project5';
 
 //Connect to mongo and save connection
 db = mongojs(mongoURL, [], {authMechanism: 'ScramSHA1'});

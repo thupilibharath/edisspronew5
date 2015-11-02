@@ -71,7 +71,7 @@ lineReader.eachLine('amazon-meta.txt', function (line, last) {
                 title: titile,
                 categories: newstr,
                 description: "",
-                quantity: 10
+                quantity: 5
             });
             //console.log(data);
             query = "db.product_details.insert(" + data + ")";
