@@ -34,7 +34,7 @@ exports.search = function (req, res) {
         //Search the DB
         collection.find({
             $and: [{Id: parseInt(id)}, {categories: {$regex: categories}},
-                {title: {$regex: title}}]
+                {$or: [{title: {$regex: title}}, {description: {$regex: title}}]}]
         }).toArray(function (err, rows) {
                 if (err)
                     console.log(err);

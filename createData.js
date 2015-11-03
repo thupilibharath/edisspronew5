@@ -69,6 +69,7 @@ lineReader.eachLine('amazon-meta.txt', function (line, last) {
                 Id: record.Id,
                 ASIN: record.ASIN,
                 title: titile,
+                group: record.group,
                 categories: newstr,
                 description: "",
                 quantity: 5
