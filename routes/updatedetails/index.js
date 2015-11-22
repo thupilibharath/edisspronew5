@@ -21,7 +21,7 @@ exports.updatedetails = function (req, res) {
     else {
         var collection = db.collection('user_details');
         console.log('User is ' + sess.username);
-        collection.find({uname: sess.username}).toArray(function (err, rows) {
+        collection.find({$and:[{uname: sess.username}, {pwd:sess.pwd}]}).toArray(function (err, rows) {
             if (!err&&rows.length!=0) {
                 console.log('UNAME is '+sess.username);
                 var email = rows[0].email;

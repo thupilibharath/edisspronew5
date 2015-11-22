@@ -15,6 +15,7 @@ exports.loginsuccess = function (req, res) {
 
         var sess = req.session;
         sess.username = uname;
+        sess.pwd = pwd;
 
         console.log('sessionID  ' + sess.id);
         console.log(sess.cookie.maxAge);
@@ -24,10 +25,10 @@ exports.loginsuccess = function (req, res) {
         var size;
         // Query DB
 
-        collection.find({"uname": uname}).toArray(function (err, rows) {
+        collection.find({$and:[{"uname": uname}, {"pwd":pwd}]}).toArray(function (err, rows) {
             if (!err && rows.length == 0) {
                 res.setHeader('Content-Type', 'application/json');
-                res.send(JSON.stringify({err_message: 'That username and password combination was not available'}, null, 3));
+                res.send(JSON.stringify({err_message: 'That username and password combination was not available '}, null, 3));
             }
             else if (!err && rows.length > 0) {
                 console.log('The solution is: ', rows);

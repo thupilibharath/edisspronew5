@@ -14,7 +14,7 @@ exports.register = function (req, res) {
     var emailvalidator = new regex(/\S+@\S+\.\S+/);
     var zipvalidator = new regex(/(^\d{5}$)|(^\d{5}-\d{4}$)/);
 
-    var squel = require("squel");
+    //var squel = require("squel");
     var error = false;
     var success = false;
     var email = req.body.email;
@@ -23,7 +23,6 @@ exports.register = function (req, res) {
     var address = req.body.address;
     var city = req.body.city;
     var state = req.body.state;
-    var zip = req.body.zip;
     var uname = req.body.username;
     var pwd = req.body.password;
 
@@ -33,7 +32,7 @@ exports.register = function (req, res) {
     console.log(address);
     console.log(city);
     console.log(state);
-    console.log(zip);
+    //console.log(zip);
     console.log(uname);
     console.log(pwd);
 
@@ -70,12 +69,6 @@ exports.register = function (req, res) {
 
         }
 
-        if (typeof zip == 'undefined' || zip == '' || zipvalidator.test(zip) == true) {
-            error = true;
-            console.log('zip error');
-
-        }
-
         if (typeof uname == 'undefined' || uname == '') {
             error = true;
             console.log('uname error');
@@ -93,7 +86,7 @@ exports.register = function (req, res) {
         }
 
 
-        data = data + ' ' + email + ' ' + fname + ' ' + lname + ' ' + address + ' ' + city + ' ' + state + ' ' + zip + ' ' + uname + ' ' + pwd;
+        data = data + ' ' + email + ' ' + fname + ' ' + lname + ' ' + address + ' ' + city + ' ' + state + ' ' + ' ' + uname + ' ' + pwd;
         console.log(data);
 
 
@@ -101,7 +94,7 @@ exports.register = function (req, res) {
         var collection = db.collection('user_details');
         if (error == false) {
             collection.find({
-                $or: [{"uname": uname}, {
+                $or: [{
                     $and: [{
                         "fname": fname,
                         "lname": lname
@@ -131,7 +124,6 @@ exports.register = function (req, res) {
                         "address": address,
                         "city": city,
                         "state": state,
-                        "zip": zip,
                         "uname": uname,
                         "pwd": pwd,
                         "role": "normal"
@@ -159,6 +151,7 @@ exports.register = function (req, res) {
     }
 
     catch (ex) {
+        console.log(ex);
 
         res.send(JSON.stringify({message: 'there was a problem with your registration'}));
         //callback(ex);
